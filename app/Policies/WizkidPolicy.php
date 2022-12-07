@@ -13,10 +13,10 @@ class WizkidPolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @param Wizkid $wizkid
+     * @param Wizkid|null $wizkid
      * @return bool
      */
-    public function viewAny(Wizkid $wizkid): bool
+    public function viewAny(?Wizkid $wizkid): bool
     {
         return true;
     }
@@ -65,7 +65,8 @@ class WizkidPolicy
      */
     public function delete(Wizkid $visitor, Wizkid $wizkid): bool
     {
-        return $visitor->id !== $wizkid->id;
+        return $wizkid->fired_at === null
+            && $visitor->id !== $wizkid->id;
     }
 
     /**
@@ -77,7 +78,7 @@ class WizkidPolicy
      */
     public function restore(Wizkid $visitor, Wizkid $wizkid): bool
     {
-        return true;
+        return $wizkid->fired_at !== null;
     }
 
     /**
@@ -89,6 +90,6 @@ class WizkidPolicy
      */
     public function forceDelete(Wizkid $visitor, Wizkid $wizkid): bool
     {
-        return true;
+        return $visitor->id !== $wizkid->id;
     }
 }
