@@ -53,13 +53,13 @@ class Wizkid extends Authenticatable
         'role' => WizkidRole::class,
     ];
 
-    public function profilePhotoUrl(): string|null
+    public function profilePhotoUrl(): string
     {
         $disk = Storage::disk('public');
 
         return $disk->fileExists($this->profile_photo_path ?? '')
             ? $disk->url($this->profile_photo_path)
-            : null;
+            : asset('images/owow-logo.png');
     }
 
     /**
