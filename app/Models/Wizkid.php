@@ -4,7 +4,9 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\WizkidRole;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -16,6 +18,7 @@ class Wizkid extends Authenticatable
     use HasFactory;
     use Notifiable;
     use SoftDeletes;
+    use Prunable;
 
     public const DELETED_AT = 'fired_at';
 
@@ -47,7 +50,16 @@ class Wizkid extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
         'role' => WizkidRole::class,
     ];
+
+    /**
+     * Get the prunable model query.
+     *
+     * @return Builder
+     */
+    public function prunable(): Builder
+    {
+        return static::where('fired_at', '<', now()->addWeek());
+    }
 }
