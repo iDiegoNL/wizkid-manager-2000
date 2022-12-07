@@ -2,10 +2,14 @@
 
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Livewire\Auth\Login;
+use App\Http\Livewire\Auth\LoginPassphrase;
 use App\Http\Livewire\Auth\Passwords\Confirm;
 use App\Http\Livewire\Auth\Passwords\Email;
 use App\Http\Livewire\Auth\Passwords\Reset;
 use App\Http\Livewire\Auth\Register;
+use App\Http\Livewire\Wizkids\CreateWizkid;
+use App\Http\Livewire\Wizkids\IndexWizkids;
+use App\Http\Livewire\Wizkids\ShowWizkid;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,7 +23,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'welcome')->name('home');
+Route::get('/', IndexWizkids::class)->name('home');
+
+Route::get('/{wizkid}', ShowWizkid::class)->name('wizkids.show');
+
+Route::get('/wizkids/create', CreateWizkid::class)->name('wizkids.create');
 
 Route::middleware('guest')->group(function () {
     Route::get('login', Login::class)
@@ -36,6 +44,9 @@ Route::get('password/reset/{token}', Reset::class)
     ->name('password.reset');
 
 Route::middleware('auth')->group(function () {
+    Route::get('login/passphrase', LoginPassphrase::class)
+        ->name('login.passphrase');
+
     Route::get('password/confirm', Confirm::class)
         ->name('password.confirm');
 

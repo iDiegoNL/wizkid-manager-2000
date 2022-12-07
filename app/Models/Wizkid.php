@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\WizkidRole;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,6 +9,7 @@ use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 
 class Wizkid extends Authenticatable
@@ -52,6 +52,15 @@ class Wizkid extends Authenticatable
     protected $casts = [
         'role' => WizkidRole::class,
     ];
+
+    public function profilePhotoUrl(): string|null
+    {
+        $disk = Storage::disk('public');
+
+        return $disk->fileExists($this->profile_photo_path ?? '')
+            ? $disk->url($this->profile_photo_path)
+            : null;
+    }
 
     /**
      * Get the prunable model query.
