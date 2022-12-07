@@ -2,8 +2,7 @@
 
 namespace App\Http\Livewire\Auth;
 
-use App\Providers\RouteServiceProvider;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Wizkid;
 use Livewire\Component;
 
 class Login extends Component
@@ -11,28 +10,27 @@ class Login extends Component
     /** @var string */
     public $email = '';
 
-    /** @var string */
-    public $password = '';
 
     /** @var bool */
     public $remember = false;
 
     protected $rules = [
         'email' => ['required', 'email'],
-        'password' => ['required'],
     ];
 
     public function authenticate()
     {
         $this->validate();
 
-        if (!Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
-            $this->addError('email', trans('auth.failed'));
+        $wizkid = Wizkid::query()
+            ->where('email', $this->email)
+            ->first();
 
-            return;
+        if ($wizkid) {
+            $wizkid->sendLoginLink();
         }
 
-        return redirect()->intended(route('home'));
+        session()->flash('magic-link-sent', true);
     }
 
     public function render()

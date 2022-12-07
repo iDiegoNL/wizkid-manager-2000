@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\VerifyLoginTokenController;
 use App\Http\Livewire\Auth\Login;
-use App\Http\Livewire\Auth\LoginPassphrase;
 use App\Http\Livewire\Auth\Passwords\Confirm;
 use App\Http\Livewire\Auth\Passwords\Email;
 use App\Http\Livewire\Auth\Passwords\Reset;
@@ -33,20 +33,14 @@ Route::middleware('guest')->group(function () {
     Route::get('login', Login::class)
         ->name('login');
 
+    Route::get('verify-login/{token}', VerifyLoginTokenController::class)->name('verify-login');
+
     Route::get('register', Register::class)
         ->name('register');
 });
 
-Route::get('password/reset', Email::class)
-    ->name('password.request');
-
-Route::get('password/reset/{token}', Reset::class)
-    ->name('password.reset');
-
 Route::middleware('auth')->group(function () {
-    Route::get('password/confirm', Confirm::class)
-        ->name('password.confirm');
-
     Route::match(['get', 'post'], 'logout', LogoutController::class)
+        ->middleware('auth')
         ->name('logout');
 });

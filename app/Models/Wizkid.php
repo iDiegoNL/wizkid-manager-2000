@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\WizkidRole;
+use App\Traits\HasLoginTokens;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Prunable;
@@ -16,6 +17,7 @@ class Wizkid extends Authenticatable
 {
     use HasApiTokens;
     use HasFactory;
+    use HasLoginTokens;
     use Notifiable;
     use SoftDeletes;
     use Prunable;

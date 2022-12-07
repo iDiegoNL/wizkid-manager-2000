@@ -12,6 +12,30 @@
 
 namespace App\Models{
 /**
+ * App\Models\LoginToken
+ *
+ * @property int $id
+ * @property int $wizkid_id
+ * @property string $token
+ * @property \Illuminate\Support\Carbon $expires_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Wizkid $wizkid
+ * @method static \Illuminate\Database\Eloquent\Builder|LoginToken newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|LoginToken newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|LoginToken query()
+ * @method static \Illuminate\Database\Eloquent\Builder|LoginToken whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LoginToken whereExpiresAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LoginToken whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LoginToken whereToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LoginToken whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LoginToken whereWizkidId($value)
+ */
+	class LoginToken extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Wizkid
  *
  * @property int $id
@@ -24,6 +48,8 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $fired_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\LoginToken[] $loginTokens
+ * @property-read int|null $login_tokens_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Sanctum\PersonalAccessToken[] $tokens
