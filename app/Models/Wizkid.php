@@ -17,7 +17,7 @@ class Wizkid extends Authenticatable
     use Notifiable;
     use SoftDeletes;
 
-    const DELETED_AT = 'fired_at';
+    public const DELETED_AT = 'fired_at';
 
     /**
      * The attributes that are mass assignable.
