@@ -44,9 +44,6 @@ Route::get('password/reset/{token}', Reset::class)
     ->name('password.reset');
 
 Route::middleware('auth')->group(function () {
-    Route::get('login/passphrase', LoginPassphrase::class)
-        ->name('login.passphrase');
-
     Route::get('password/confirm', Confirm::class)
         ->name('password.confirm');
 
