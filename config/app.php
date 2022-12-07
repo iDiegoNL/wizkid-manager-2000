@@ -58,6 +58,8 @@ return [
 
     'asset_url' => env('ASSET_URL'),
 
+    'profile_photos_driver' => env('PROFILE_PHOTOS_DRIVER', 'public'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone

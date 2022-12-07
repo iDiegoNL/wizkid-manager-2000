@@ -57,11 +57,17 @@ class Wizkid extends Authenticatable
 
     public function profilePhotoUrl(): string
     {
-        $disk = Storage::disk('public');
+        $disk = Storage::disk(config('app.profile_photos_driver'));
+        $defaultProfilePhoto = asset('images/owow-logo.png');
 
-        return $disk->fileExists($this->profile_photo_path ?? '')
+        if (!$this->profile_photo_path) {
+            return $defaultProfilePhoto;
+        }
+
+
+        return $disk->fileExists($this->profile_photo_path)
             ? $disk->url($this->profile_photo_path)
-            : asset('images/owow-logo.png');
+            : $defaultProfilePhoto;
     }
 
     /**

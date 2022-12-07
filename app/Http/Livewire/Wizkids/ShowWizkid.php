@@ -6,6 +6,7 @@ use App\Models\Wizkid;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\RedirectResponse;
 use Livewire\Component;
+use Livewire\Redirector;
 
 class ShowWizkid extends Component
 {
@@ -25,7 +26,7 @@ class ShowWizkid extends Component
         return view('livewire.wizkids.show-wizkid');
     }
 
-    public function forceDeleteWizkid(): RedirectResponse
+    public function forceDeleteWizkid(): RedirectResponse|Redirector
     {
         $this->authorize('forceDelete', $this->wizkid);
 

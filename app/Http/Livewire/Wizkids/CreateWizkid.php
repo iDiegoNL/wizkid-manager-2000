@@ -45,7 +45,7 @@ class CreateWizkid extends Component
             'email' => $this->email,
             'phone_number' => $this->phone_number,
             'role' => $this->role,
-            'profile_photo_path' => $this->profile_photo->store('wizkids', 'public'),
+            'profile_photo_path' => $this->profile_photo->storePublicly('wizkids', config('app.profile_photos_driver')),
         ]);
 
         return redirect()->route('home');
