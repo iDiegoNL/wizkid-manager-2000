@@ -20,17 +20,17 @@
                 class="space-y-12 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 sm:space-y-0 lg:grid-cols-3 lg:gap-x-8">
                 @foreach($wizkids as $wizkid)
                     <li>
-                        <div class="space-y-4">
+                        <a class="space-y-4" href="{{ route('wizkids.show', $wizkid) }}">
                             <div class="aspect-w-3 aspect-h-2">
                                 <img class="rounded-lg object-cover shadow-lg"
-                                     src="{{ $wizkid->profilePhotoUrl() ?? asset('images/owow-logo.png') }}" alt="">
+                                     src="{{ $wizkid->profilePhotoUrl() }}" alt="{{ $wizkid->name }}'s profile photo">
                             </div>
 
                             <div class="space-y-1 text-lg font-medium leading-6">
                                 <h3>{{ $wizkid->name }}</h3>
                                 <p class="text-indigo-600">{{ ucwords($wizkid->role->value) }}</p>
                             </div>
-                        </div>
+                        </a>
                     </li>
                 @endforeach
             </ul>

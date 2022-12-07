@@ -25,9 +25,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', IndexWizkids::class)->name('home');
 
-Route::get('/{wizkid}', ShowWizkid::class)->name('wizkids.show');
-
 Route::get('/wizkids/create', CreateWizkid::class)->name('wizkids.create');
+
+Route::get('/wizkids/{wizkidId}', ShowWizkid::class)->name('wizkids.show');
 
 Route::middleware('guest')->group(function () {
     Route::get('login', Login::class)
