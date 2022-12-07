@@ -18930,6 +18930,27 @@
      
 }
 
+    namespace Illuminate\Validation { 
+            /**
+     * 
+     *
+     */ 
+        class Rule {
+                    /**
+         * 
+         *
+         * @see \Propaganistas\LaravelPhone\PhoneServiceProvider::register()
+         * @static 
+         */ 
+        public static function phone()
+        {
+                        return \Illuminate\Validation\Rule::phone();
+        }
+         
+    }
+     
+}
+
     namespace Illuminate\Database\Query { 
             /**
      * 
