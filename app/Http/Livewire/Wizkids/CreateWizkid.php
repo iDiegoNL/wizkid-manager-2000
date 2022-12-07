@@ -4,13 +4,14 @@ namespace App\Http\Livewire\Wizkids;
 
 use App\Enums\WizkidRole;
 use App\Models\Wizkid;
-use Filament\Notifications\Notification;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Validation\Rules\Enum;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
 class CreateWizkid extends Component
 {
+    use AuthorizesRequests;
     use WithFileUploads;
 
     public string $name = '';
@@ -18,6 +19,11 @@ class CreateWizkid extends Component
     public string $phone_number = '';
     public string $role = 'Please select a role';
     public $profile_photo = '';
+
+    public function mount()
+    {
+        $this->authorize('create', Wizkid::class);
+    }
 
     public function render()
     {
