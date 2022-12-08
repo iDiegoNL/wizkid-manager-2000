@@ -57,6 +57,18 @@ class WizkidPolicy
     }
 
     /**
+     * Determine whether the user can update sensitive data of the model.
+     *
+     * @param Wizkid $visitor
+     * @param Wizkid $wizkid
+     * @return bool
+     */
+    public function updateSensitiveData(Wizkid $visitor, Wizkid $wizkid): bool
+    {
+        return true;
+    }
+
+    /**
      * Determine whether the user can delete the model.
      *
      * @param Wizkid $visitor

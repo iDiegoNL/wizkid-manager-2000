@@ -29,17 +29,19 @@
                                         <x-forms.input-error for="name"/>
                                     </div>
 
-                                    <div class="sm:col-span-3">
-                                        <x-forms.input label="Email" id="email" name="email" type="email"
-                                                       wire:model.lazy="email"/>
-                                        <x-forms.input-error for="email"/>
-                                    </div>
+                                    @can('updateSensitiveData', $wizkid)
+                                        <div class="sm:col-span-3">
+                                            <x-forms.input label="Email" id="email" name="email" type="email"
+                                                           wire:model.lazy="email"/>
+                                            <x-forms.input-error for="email"/>
+                                        </div>
 
-                                    <div class="sm:col-span-4">
-                                        <x-forms.input label="Phone number" id="phone_number" name="phone_number"
-                                                       type="text" wire:model.lazy="phone_number"/>
-                                        <x-forms.input-error for="phone_number"/>
-                                    </div>
+                                        <div class="sm:col-span-4">
+                                            <x-forms.input label="Phone number" id="phone_number" name="phone_number"
+                                                           type="text" wire:model.lazy="phone_number"/>
+                                            <x-forms.input-error for="phone_number"/>
+                                        </div>
+                                    @endcan
                                 </div>
                             </div>
                         </div>
