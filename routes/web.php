@@ -8,6 +8,7 @@ use App\Http\Livewire\Auth\Passwords\Email;
 use App\Http\Livewire\Auth\Passwords\Reset;
 use App\Http\Livewire\Auth\Register;
 use App\Http\Livewire\Wizkids\CreateWizkid;
+use App\Http\Livewire\Wizkids\EditWizkid;
 use App\Http\Livewire\Wizkids\IndexWizkids;
 use App\Http\Livewire\Wizkids\ShowWizkid;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +29,8 @@ Route::get('/', IndexWizkids::class)->name('home');
 Route::get('/wizkids/create', CreateWizkid::class)->name('wizkids.create');
 
 Route::get('/wizkids/{wizkidId}', ShowWizkid::class)->name('wizkids.show');
+
+Route::get('/wizkids/{wizkidId}/edit', EditWizkid::class)->name('wizkids.edit');
 
 Route::middleware('guest')->group(function () {
     Route::get('login', Login::class)
