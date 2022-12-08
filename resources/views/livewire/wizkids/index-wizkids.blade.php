@@ -12,9 +12,22 @@
                         <x-heroicon-s-sparkles class="ml-3 -mr-1 h-5 w-5"/>
                     </a>
                 </div>
+
                 <p class="text-xl text-gray-500">
                     Meet our wicked team of Wizkids!
                 </p>
+
+                <div class="mt-5 flex flex-row space-x-3">
+                    <x-forms.select id="role-filter" name="role-filter" wire:model.lazy="roleFilter">
+                        <option value="">Filter by role</option>
+                        @foreach(\App\Enums\WizkidRole::cases() as $role)
+                            <option value="{{ $role->value }}">{{ ucwords($role->value) }}</option>
+                        @endforeach
+                    </x-forms.select>
+
+                    <x-forms.input id="name-filter" name="name-filter" type="text"
+                                   placeholder="Search by name" wire:model="nameFilter"/>
+                </div>
             </div>
             <ul role="list"
                 class="space-y-12 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 sm:space-y-0 lg:grid-cols-3 lg:gap-x-8">

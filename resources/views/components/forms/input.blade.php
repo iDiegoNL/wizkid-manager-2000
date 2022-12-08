@@ -1,6 +1,6 @@
 @props([
     'id',
-    'label',
+    'label' => '',
 ])
 
 <div>
