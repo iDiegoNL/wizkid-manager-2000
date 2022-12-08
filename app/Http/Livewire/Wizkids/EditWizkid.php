@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Wizkids;
 
 use App\Enums\WizkidRole;
 use App\Models\Wizkid;
+use Filament\Notifications\Notification;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
@@ -53,6 +54,11 @@ class EditWizkid extends Component
             'email' => $this->email,
             'phone_number' => $this->phone_number,
         ]);
+
+        Notification::make()
+            ->title('Wizkid edited!')
+            ->success()
+            ->send();
 
         return redirect()->route('home');
     }

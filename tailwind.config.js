@@ -30,6 +30,7 @@ module.exports = {
         './resources/**/*.php',
         './resources/**/*.vue',
         './resources/**/*.twig',
+        './vendor/filament/**/*.blade.php',
     ],
     plugins: [
         require('@tailwindcss/forms'),

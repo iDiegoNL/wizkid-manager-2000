@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Wizkids;
 
 use App\Models\Wizkid;
+use Filament\Notifications\Notification;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\RedirectResponse;
 use Livewire\Component;
@@ -32,6 +33,11 @@ class ShowWizkid extends Component
 
         $this->wizkid->forceDelete();
 
+        Notification::make()
+            ->title('Wizkid deleted!')
+            ->success()
+            ->send();
+
         return redirect()->route('home');
     }
 
@@ -40,6 +46,12 @@ class ShowWizkid extends Component
         $this->authorize('delete', $this->wizkid);
 
         $this->wizkid->delete();
+
+        Notification::make()
+            ->title('Wizkid fired!')
+            ->icon('heroicon-o-fire')
+            ->iconColor('danger')
+            ->send();
     }
 
     public function unfireWizkid(): void
@@ -47,5 +59,11 @@ class ShowWizkid extends Component
         $this->authorize('restore', $this->wizkid);
 
         $this->wizkid->restore();
+
+        Notification::make()
+            ->title('Wizkid unfired!')
+            ->icon('heroicon-o-rewind')
+            ->iconColor('primary')
+            ->send();
     }
 }

@@ -26,5 +26,7 @@
 
     <body class="bg-gray-100">
         @yield('body')
+
+        @livewire('notifications')
     </body>
 </html>

@@ -4,6 +4,8 @@ namespace App\Http\Livewire\Wizkids;
 
 use App\Enums\WizkidRole;
 use App\Models\Wizkid;
+use Filament\Notifications\Actions\Action;
+use Filament\Notifications\Notification;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Validation\Rules\Enum;
 use Livewire\Component;
@@ -40,13 +42,23 @@ class CreateWizkid extends Component
             'profile_photo' => ['required', 'image', 'max:1024'],
         ]);
 
-        Wizkid::create([
+        $wizkid = Wizkid::create([
             'name' => $this->name,
             'email' => $this->email,
             'phone_number' => $this->phone_number,
             'role' => $this->role,
             'profile_photo_path' => $this->profile_photo->storePublicly('wizkids', config('app.profile_photos_driver')),
         ]);
+
+        Notification::make()
+            ->title('Wizkid created!')
+            ->success()
+            ->actions([
+                Action::make('View Wizkid')
+                    ->button()
+                    ->url(route('wizkids.show', $wizkid)),
+            ])
+            ->send();
 
         return redirect()->route('home');
     }
