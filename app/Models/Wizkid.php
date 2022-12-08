@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Enums\WizkidRole;
+use App\Events\WizkidFired;
+use App\Events\WizkidUnfired;
 use App\Traits\HasLoginTokens;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -79,4 +81,14 @@ class Wizkid extends Authenticatable
     {
         return static::where('fired_at', '<', now()->addWeek());
     }
+
+    /**
+     * The event map for the model.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'deleted' => WizkidFired::class,
+        'restored' => WizkidUnfired::class,
+    ];
 }
