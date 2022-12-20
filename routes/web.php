@@ -3,10 +3,6 @@
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\VerifyLoginTokenController;
 use App\Http\Livewire\Auth\Login;
-use App\Http\Livewire\Auth\Passwords\Confirm;
-use App\Http\Livewire\Auth\Passwords\Email;
-use App\Http\Livewire\Auth\Passwords\Reset;
-use App\Http\Livewire\Auth\Register;
 use App\Http\Livewire\Wizkids\CreateWizkid;
 use App\Http\Livewire\Wizkids\EditWizkid;
 use App\Http\Livewire\Wizkids\IndexWizkids;
@@ -37,9 +33,6 @@ Route::middleware('guest')->group(function () {
         ->name('login');
 
     Route::get('verify-login/{token}', VerifyLoginTokenController::class)->name('verify-login');
-
-    Route::get('register', Register::class)
-        ->name('register');
 });
 
 Route::middleware('auth')->group(function () {
